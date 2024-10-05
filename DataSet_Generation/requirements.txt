@@ -1,0 +1,7 @@
+datasets
+pandas
+nltk
+contractions
+re
+sentence_transformers
+torch

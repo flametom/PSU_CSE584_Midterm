@@ -1,0 +1,8 @@
+datasets
+pandas
+nltk
+contractions
+sentence_transformers
+torch
+transformers
+accelerate>=0.26.0
