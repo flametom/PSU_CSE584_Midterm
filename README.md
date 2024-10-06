@@ -75,6 +75,23 @@ The architecture was specifically designed to distinguish between LLMs by effect
 
 ## Results
 
+| Model                               | ACC (↑)    | Micro-F1 (↑) |
+| ----------------------------------- | ---------- | ------------ |
+| Multinomial Naive Bayes (MNB)       | 0.3154     | 0.3062       |
+| K-Nearest Neighbors (KNN) @k=7      | 0.1687     | 0.1646       |
+| Logistic Regression (LR)            | 0.3976     | 0.3923       |
+| Random Forest (RF)                  | 0.2634     | 0.2648       |
+| Extreme Gradient Boosting (XGBoost) | 0.3581     | 0.3523       |
+| RNN (Tokenizer-DeBERTaV3)           | 0.4258     | 0.4183       |
+| LSTM (Tokenizer-DeBERTaV3)          | 0.4204     | 0.4162       |
+| GRU (Tokenizer-DeBERTaV3)           | 0.4268     | 0.3983       |
+| BiLSTM (Tokenizer-DeBERTaV3)        | 0.4446     | 0.4433       |
+| CNNBiLSTM (Tokenizer-DeBERTaV3)     | 0.3914     | 0.3938       |
+| BERT (Fine-tuned)                   | 0.5372     | 0.5369       |
+| XLNet (Fine-tuned)                  | 0.5108     | 0.5139       |
+| RoBERTa (Fine-tuned)                | 0.5202     | 0.5182       |
+| **DeBERTaV3Classifier**             | **0.5478** | **0.5396**   |
+
 The DeBERTaV3Classifier exhibited the highest performance compared to other baseline models, achieving an accuracy of **0.5478** and a micro-F1 score of **0.5396**. When the text generation length was extended to five sentences, the classifier's performance improved significantly, suggesting that additional context aids in distinguishing between LLMs more effectively.
 
 ## In-Depth Analysis and Additional Experiments
