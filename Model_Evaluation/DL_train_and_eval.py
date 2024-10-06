@@ -37,10 +37,10 @@ from sklearn.model_selection import train_test_split
 from .load_and_preprocess import preprocess_data, TextDataset, create_data_loaders
 
 def define_model(model_class, num_classes):
-    # 모델 인스턴스화
+
     model = model_class(num_classes=num_classes)
     
-    # 모든 레이어 학습 가능하게 설정
+
     for param in model.parameters():
         param.requires_grad = True
     
@@ -106,7 +106,7 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, scheduler
         if epochs_no_improve == patience:
             print(f'Early stopping triggered after {epoch +1} epochs')
             break
-    # Best 모델 로드
+
     model.load_state_dict(torch.load('best_model.pth'))
     
     return train_losses, val_losses
@@ -128,30 +128,13 @@ def evaluate_model(model, test_loader, device, label_encoder, train_losses, val_
             all_predictions.extend(predictions.cpu().tolist())
             all_labels.extend(labels.cpu().tolist())
     
-    # 정확도 계산
+
     accuracy = accuracy_score(all_labels, all_predictions)
-    
-    # F1 스코어 계산
+
     f1 = f1_score(all_labels, all_predictions, average='weighted')
-    
-    # 혼동 행렬 생성
+
     cm = confusion_matrix(all_labels, all_predictions)
-    
-
-    
-    # 분류 보고서 출력
-
-    
-    # 손실 그래프 출력
-    # plt.figure(figsize=(10, 6))
-    # plt.plot(train_losses, label='Training Loss')
-    # plt.plot(val_losses, label='Validation Loss')
-    #plt.title('Training and Validation Loss')
-    #plt.xlabel('Epochs')
-    #plt.ylabel('Loss')
-    #plt.legend()
-    #plt.show()
-    
+ 
     results = {
         'accuracy': accuracy,
         'f1_score': f1,
@@ -165,7 +148,6 @@ def evaluate_model(model, test_loader, device, label_encoder, train_losses, val_
     print("\nClassification Report:")
     print(classification_report(all_labels, all_predictions, target_names=class_names))
     
-    # 혼동 행렬 시각화
     plt.figure(figsize=(10, 8))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
                xticklabels=label_encoder.classes_,
@@ -206,8 +188,6 @@ def train_and_evaluate(model_class, X_train, X_val, X_test, y_train, y_val, y_te
         raise ValueError("Unknown model class")        
 
     
-    # optimizer setting
-    # optimizer = AdamW(model.parameters(), lr=2e-5, weight_decay=0.01)
     
     if isinstance(model, DeBERTaV3Classifier): 
         optimizer = AdamW([
@@ -247,24 +227,21 @@ def train_and_evaluate(model_class, X_train, X_val, X_test, y_train, y_val, y_te
 
 
 def save_model(model, model_name, label_encoder, tokenizer, results):
-    # 현재 날짜와 시간을 포함한 폴더 이름 생성
+
     current_time = datetime.now().strftime("%Y%m%d_%H%M%S")
     save_dir = f"saved_models/{model_name}_{current_time}"
     
-    # 폴더 생성
+
     os.makedirs(save_dir, exist_ok=True)
     
-    # 모델 상태 저장
+
     torch.save(model.state_dict(), f"{save_dir}/model_state.pth")
-    
-    # 레이블 인코더 저장
+
     import joblib
     joblib.dump(label_encoder, f"{save_dir}/label_encoder.joblib")
-    
-    # 토크나이저 저장
+
     tokenizer.save_pretrained(save_dir)
-    
-    # 결과 저장
+
     with open(f"{save_dir}/results.txt", "w") as f:
         for key, value in results.items():
             f.write(f"{key}: {value}\n")

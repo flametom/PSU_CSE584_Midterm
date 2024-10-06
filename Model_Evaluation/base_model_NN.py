@@ -142,7 +142,6 @@ def train_model_NN(model, train_loader, criterion, optimizer, scheduler, device,
             loss = criterion(outputs, labels)
             loss.backward()
             
-            # 그래디언트 클리핑 적용
             clip_grad_norm_(model.parameters(), max_norm=1.0)
             
             optimizer.step()
@@ -160,7 +159,6 @@ def train_model_NN(model, train_loader, criterion, optimizer, scheduler, device,
         with torch.no_grad():
             for batch in val_loader:
                 input_ids = batch['input_ids'].to(device)
-                # attention_mask = batch['attention_mask'].to(device)
                 labels = batch['labels'].to(device)
 
                 outputs = model(input_ids)
@@ -264,7 +262,6 @@ def evaluate_model_NN(model, test_loader, device, label_encoder, train_losses, v
     print("\nClassification Report:")
     print(classification_report(all_labels, all_predictions, target_names=class_names))
     
-    # 혼동 행렬 시각화
     plt.figure(figsize=(10, 8))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
                xticklabels=label_encoder.classes_,
