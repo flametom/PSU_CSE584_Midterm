@@ -1,6 +1,7 @@
 # CSE 584 Midterm Project
 
 **Jeongwon Bae (945397461)**
+
 **Individual Participation**
 
 ## Overview
