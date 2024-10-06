@@ -65,15 +65,7 @@ class DeBERTaV3Classifier(nn.Module):
         self.relu = nn.ReLU()
         self.fc2 = nn.Linear(128, num_classes)
 
-    def forward(self, input_ids, attention_mask):
-        # outputs = self.deberta(input_ids=input_ids, attention_mask=attention_mask)
-        # pooled_output = outputs.last_hidden_state[:, 0, :]
-        # x = self.dropout(pooled_output)
-        # x = self.fc1(x)
-        # x = self.relu(x)
-        # x = self.dropout(x)
-        # return self.fc2(x)
-        
+    def forward(self, input_ids, attention_mask):    
         outputs = self.deberta(input_ids=input_ids, attention_mask=attention_mask)
         sequence_output = outputs.last_hidden_state  # [batch_size, seq_length, hidden_size]
 

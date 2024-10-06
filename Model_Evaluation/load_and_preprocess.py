@@ -20,7 +20,8 @@ def load_and_preprocess_data(file_paths):
     
     combined_df_raw = pd.concat(all_data, ignore_index=True)
     combined_df_raw = combined_df_raw[combined_df_raw['X_j'] != "Invalid generation"]
-    conbined_df_raw = combined_df_raw[combined_df_raw['X_i'] != 'maybe a b * * w j * b while wearing']
+    if 'X_i' in df.columns:
+        conbined_df_raw = combined_df_raw[combined_df_raw['X_i'] != 'maybe a b * * w j * b while wearing']
     
     def preprocess_text(text):
         if pd.isna(text):
@@ -73,6 +74,7 @@ def load_and_preprocess_data(file_paths):
         print()
     
     return X_train, X_test, X_val, y_train, y_test, y_val, le, combined_df, combined_df_temp
+
 
 def preprocess_data(X, y):
 

@@ -216,30 +216,11 @@ def train_and_evaluate(model_class, X_train, X_val, X_test, y_train, y_val, y_te
             {'params': model.fc1.parameters(), 'lr': 1e-5},
             {'params': model.fc2.parameters(), 'lr': 1e-5}
         ], weight_decay=0.02)
-    elif isinstance(model, XLNetClassifier): 
-        optimizer = AdamW([
-            {'params': pretrained_model.word_embedding.parameters(), 'lr': 2e-6},
-            {'params': pretrained_model.layer.parameters(), 'lr': 5e-5},
-            # {'params': pretrained_model.pooler.parameters(), 'lr': 1e-5},
-            {'params': model.fc.parameters(), 'lr': 1e-5}
-        ], weight_decay=0.02)
-    elif isinstance(model, RoBERTaClassifier): 
-        optimizer = AdamW([
-            {'params': pretrained_model.embeddings.parameters(), 'lr': 2e-6},
-            {'params': pretrained_model.encoder.parameters(), 'lr': 5e-5},
-            # {'params': pretrained_model.pooler.parameters(), 'lr': 1e-5},
-            {'params': model.fc.parameters(), 'lr': 1e-5}
-        ], weight_decay=0.02)
     else:
-        optimizer = AdamW([
-            {'params': pretrained_model.embeddings.parameters(), 'lr': 2e-6},
-            {'params': pretrained_model.encoder.parameters(), 'lr': 5e-5},
-            {'params': model.fc.parameters(), 'lr': 1e-5}            
-        ], weight_decay=0.02)
+        optimizer = torch.optim.AdamW(model.parameters(), lr=2e-5, weight_decay=0.02) 
     
     # loss function - Multi Class
-    criterion = nn.CrossEntropyLoss()
-    
+    criterion = nn.CrossEntropyLoss()    
     
     # Scheduler
     total_steps = len(train_loader) * num_epochs  # 10 epochs
