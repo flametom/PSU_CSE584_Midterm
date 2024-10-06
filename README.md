@@ -1,7 +1,6 @@
 # CSE 584 Midterm Project
 
 **Jeongwon Bae (945397461)**
-
 **Individual Participation**
 
 ## Overview
@@ -87,7 +86,7 @@ Further experimental evaluations were conducted to assess the robustness and eff
 - **BBC-text Multi-Class Dataset**: The classifier achieved an accuracy of **0.9752** and a micro-F1 score of **0.9753**, demonstrating its generalizability to standard text classification tasks.
 - **Tweet Emotion Dataset**: On this dataset, the classifier achieved an accuracy of **0.9363** and a micro-F1 score of **0.9359**, indicating strong performance in emotion detection scenarios.
 
-### Extending Generation of xj to Five Sentences
+### Extending Generation of x_j to Five Sentences
 
 The experiment involving the extension of text generation length to five sentences led to the exclusion of Llama-2-7b-chat and Falcon-7b due to inconsistencies in generated output. For the remaining five LLMs, the classifier's accuracy improved from **0.6074** to **0.8844**, while the micro-F1 score increased from **0.5954** to **0.8838**. This highlights that longer text samples provide richer contextual cues, which in turn enhance the classifier's capability to differentiate between LLMs.
 
