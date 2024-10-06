@@ -107,6 +107,10 @@ Further experimental evaluations were conducted to assess the robustness and eff
 
 The experiment involving the extension of text generation length to five sentences led to the exclusion of Llama-2-7b-chat and Falcon-7b due to inconsistencies in generated output. For the remaining five LLMs, the classifier's accuracy improved from **0.6074** to **0.8844**, while the micro-F1 score increased from **0.5954** to **0.8838**. This highlights that longer text samples provide richer contextual cues, which in turn enhance the classifier's capability to differentiate between LLMs.
 
+### LLM Characteristic Analysis
+
+The confusion matrices indicated varying degrees of success in distinguishing between LLMs. Analysis of bigrams and topics showed that common phrases like 'deep breath' were used by multiple models, while unique phrases like 'yesterday evening' helped differentiate specific models. Thematic analysis revealed that models had different focuses—some on abstract topics, others on temporal activities—enhancing classification, especially with longer text samples.
+
 ## Conclusion
 
 This project underscores the feasibility of employing a deep learning-based approach for LLM attribution. The DeBERTaV3Classifier offers significant potential in areas such as AI-generated content detection and model accountability. Future research will aim to broaden the dataset by incorporating additional LLMs and further refine the classification methodology.
